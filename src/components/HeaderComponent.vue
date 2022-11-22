@@ -4,7 +4,7 @@
 								<div class="inner">
 
 									<!-- Logo -->
-										<h1  @click="goToHome()">Magic</h1>
+										<h1  @click="goToHome()">Magic the Gathering</h1>
 
 									<!-- Nav -->
 										<nav id="nav">
@@ -25,8 +25,6 @@
 
 export default{
  name:"HeaderView",
- data:()=>({
- }),
  methods:{
      goToHome(){
          this.$router.push({name:"home"})

@@ -11,8 +11,12 @@
           </header>
 
           <span class="image featured">
-            <img :src="getCardImg(this.card.imageUrl)"   width="376"
-                  height="522"  alt="" />
+            <img
+              :src="getCardImg(this.card.imageUrl)"
+              width="376"
+              height="522"
+              :alt="this.card.title"
+            />
           </span>
 
           <p>{{ this.card.originalText }}</p>
@@ -40,8 +44,6 @@
           <span class="button alt icon">
             Card power
             <i class="fa-solid fa-fire-flame-curved">{{ getPower() }}</i>
-            <i class="fa-solid fa-fire-flame-curved"></i>
-            <i class="fa-solid fa-fire-flame-curved"></i>
           </span>
         </section>
       </div>
@@ -57,24 +59,30 @@ import axios from "axios";
 
 export default {
   async created() {
-    let temp = await axios.get(
+    let apiResult = await axios.get(
       "https://api.magicthegathering.io/v1/cards/" + this.$route.params.id
     );
-    this.card = temp.data.card;
+    this.card = apiResult.data.card;
   },
   data: () => ({
     card: {},
   }),
   methods: {
+    /**
+     * Get the power of the card using emoji.
+     */
     getPower() {
       return "🔥".repeat(this.card.power);
     },
+    /**
+     * Get the img of the card if the api provide an URL, if not returns a placeholder.
+     */
     getCardImg(url) {
       if (url != null) {
         return url;
-      } else {
-        return "https://via.placeholder.com/203x310?text=LOADING+IMG";
       }
+      
+      return "https://via.placeholder.com/376x522?text=Loading+Image";
     },
   },
 };

@@ -46,21 +46,26 @@ export default {
     numberOfCard: 3,
   }),
   async created() {
-    let temp = await axios.get(
-      "https://api.magicthegathering.io/v1/cards?pageSize=3"
+    const apiResult = await axios.get(
+      `https://api.magicthegathering.io/v1/cards?pageSize=${this.numberOfCard}`
     );
-    this.cards = temp.data.cards;
+    this.cards = apiResult.data.cards;
   },
   methods: {
+    /**
+     * Go to the card details with the ID of the card.
+     */
     goToCardDetail(id) {
       this.$router.push({ name: "card", params: { id } });
     },
+    /**
+     * Get the img of the card if the api provide an URL, if not returns a placeholder.
+     */
     getCardImg(url) {
       if (url != null) {
         return url;
-      } else {
-        return "https://via.placeholder.com/203x310?text=No+Img+Found";
       }
+      return "https://via.placeholder.com/203x310?text=No+Img+Found";
     },
   },
 };

@@ -23,13 +23,5 @@
 
 export default{
  name:"FooterView",
- data:()=>({
-
- }),
- methods:{
-     
- }
- 
-
 }
 </script>
