@@ -4,10 +4,9 @@
       <h2>Ma Collection</h2>
     </header>
     <div class="card-list" v-for="(card, id) in this.cards" :key="id">
-      <div class="card-title">
+      <div class="card-title" @click="goToCardDetail(card.id)">
         <b>#{{ id + 1 }} - </b>{{ card.name }}
       </div>
-      <div class="card-action" @click="goToCardDetail(card.id)">👀</div>
     </div>
   </article>
 </template>
@@ -36,7 +35,10 @@ export default {
 
 <style>
 @import url("../assets/style/card-list.css");
-.card-action {
+.card-list {
   cursor: pointer;
+}
+.card-list:hover {
+color:white;
 }
 </style>

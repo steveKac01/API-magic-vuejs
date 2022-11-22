@@ -1,53 +1,42 @@
 <template>
-  <div class="row">
-    <div class="col-8 col-12-medium">
-      <div id="content">
-        <!-- Content -->
+  <div id="card-container">
+    <article>
+      <header>
+        <h2>{{ this.card.name }}</h2>
+        <p>{{ this.card.artist }}</p>
+      </header>
 
-        <article>
-          <header class="major">
-            <h2>{{ this.card.name }}</h2>
-            <p>{{ this.card.artist }}</p>
-          </header>
+      <span class="card-main">
+        <img
+          :src="getCardImg(this.card.imageUrl)"
+          width="376"
+          height="522"
+          :alt="this.card.title"
+        />
+      </span>
 
-          <span class="image featured">
-            <img
-              :src="getCardImg(this.card.imageUrl)"
-              width="376"
-              height="522"
-              :alt="this.card.title"
-            />
-          </span>
+      <p>{{ this.card.originalText }}</p>
+    </article>
 
-          <p>{{ this.card.originalText }}</p>
-        </article>
-      </div>
-    </div>
-    <div class="col-4 col-12-medium">
-      <div id="sidebar">
-        <!-- Sidebar -->
+    <section>
+      <header>
+        <h2>Infos</h2>
+      </header>
+      <p>
+        set name: <b>{{ this.card.setName }}</b>
+      </p>
+      <p>
+        rarity: <b>{{ this.card.rarity }}</b>
+      </p>
+      <p>
+        toughness: <b>{{ this.card.toughness }}</b>
+      </p>
 
-        <section>
-          <header class="major">
-            <h2>Infos</h2>
-          </header>
-          <p>
-            set name: <b>{{ this.card.setName }}</b>
-          </p>
-          <p>
-            rarity: <b>{{ this.card.rarity }}</b>
-          </p>
-          <p>
-            toughness: <b>{{ this.card.toughness }}</b>
-          </p>
-
-          <span class="button alt icon">
-            Card power
-            <i class="fa-solid fa-fire-flame-curved">{{ getPower() }}</i>
-          </span>
-        </section>
-      </div>
-    </div>
+      <span class="button alt icon">
+        Card power
+        <i class="fa-solid fa-fire-flame-curved">{{ getPower() }}</i>
+      </span>
+    </section>
   </div>
 </template>
 
@@ -81,7 +70,7 @@ export default {
       if (url != null) {
         return url;
       }
-      
+
       return "https://via.placeholder.com/376x522?text=Loading+Image";
     },
   },
@@ -91,5 +80,36 @@ export default {
 <style scoped>
 img {
   width: 30%;
+}
+header h2 {
+  margin-top: 1rem;
+}
+#card-container {
+  background-color: white;
+}
+article img {
+  width: 50%;
+}
+@media screen and (min-width: 768px) {
+  #card-container {
+    display: flex;
+    justify-content: center !important;
+    background-color: white;
+  }
+  .image {
+    display: flex !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  article img {
+    width: 70%;
+  }
+  section,
+  article {
+    width: 40%;
+  }
+  section {
+    align-self: center;
+  }
 }
 </style>
